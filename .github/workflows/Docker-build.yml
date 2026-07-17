@@ -13,3 +13,9 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t myapp .
+      - name: Run container and test
+        run: |
+          docker run -d -p 5000:5000 --name test-container myapp
+          sleep 5
+          curl http://localhost:5000
+          docker stop test-container
